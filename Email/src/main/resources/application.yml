@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: Email
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/Email_SYSTEM
+    username: neelesh
+    password: neelesh
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # 🔁 Creates or updates tables automatically
+    show-sql: true       # 🧾 Prints SQL queries to console
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect  # 🧠 Important for MySQL 8 compatibility
+server:
+  port: 1234
+
+encryption:
+  key: TmVlbGVzaEt1bWFyODczNDQwNzE0MTE2

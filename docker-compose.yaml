@@ -1,0 +1,16 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: Email_SYSTEM       
+      MYSQL_USER: neelesh         
+      MYSQL_PASSWORD: neelesh    
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3307:3306"                # Map to host
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
