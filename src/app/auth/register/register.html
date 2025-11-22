@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
+
+    <h3 class="text-center mb-4">Register</h3>
+
+    <!-- First Name -->
+    <input 
+      type="text" 
+      class="form-control mb-3" 
+      placeholder="First Name" 
+      [(ngModel)]="firstName">
+
+    <!-- Last Name -->
+    <input 
+      type="text" 
+      class="form-control mb-3" 
+      placeholder="Last Name" 
+      [(ngModel)]="lastName">
+
+    <!-- Email -->
+    <input 
+      type="email" 
+      class="form-control mb-3" 
+      placeholder="Email" 
+      [(ngModel)]="email">
+
+    <!-- Password -->
+    <input 
+      type="password" 
+      class="form-control mb-3" 
+      placeholder="Password" 
+      [(ngModel)]="password">
+
+    <!-- Register Button -->
+    <button 
+      class="btn btn-success w-100 mb-3" 
+      (click)="register()">
+      Register
+    </button>
+
+    <!-- Error Message -->
+    <p class="text-danger text-center" *ngIf="error">{{ error }}</p>
+
+    <!-- Link to Login -->
+    <p class="text-center mt-2">
+      Already have an account? 
+      <a routerLink="/login">Login here</a>
+    </p>
+  </div>
+</div>
