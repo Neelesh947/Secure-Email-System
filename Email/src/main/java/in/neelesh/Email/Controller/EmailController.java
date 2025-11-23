@@ -40,6 +40,9 @@ public class EmailController {
 		if (receiver == null) {
 			return ResponseEntity.badRequest().body(Map.of("error", "Receiver not found"));
 		}
+		if (sender.getEmail().equalsIgnoreCase(receiver.getEmail())) {
+			return ResponseEntity.badRequest().body(Map.of("error", "You cannot send an email to yourself"));
+		}
 
 		try {
 			Email email = emailService.sendEmail(sender, receiver, subject, body);
