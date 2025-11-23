@@ -19,7 +19,9 @@ export class Compose {
 
   send() {  }
 
-  searchMails(){}
+  searchMails(){
+    
+  }
 
   logout() {
     this.auth.logout();

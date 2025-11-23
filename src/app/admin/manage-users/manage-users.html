@@ -7,17 +7,25 @@
 
       <ul class="nav flex-column mb-3">
         <li class="nav-item mb-2">
-          <a class="nav-link" [class.active]="selectedStatus === 'All'" (click)="filterUsers('All')">All Users</a>
+          <a class="nav-link" [class.active]="selectedStatus === 'All'" (click)="filterUsers('All')"
+            style="cursor: pointer;">All Users</a>
         </li>
         <li class="nav-item mb-2">
-          <a class="nav-link" [class.active]="selectedStatus === 'Active'" (click)="filterUsers('Active')">Active Users</a>
+          <a class="nav-link" [class.active]="selectedStatus === 'Active'" (click)="filterUsers('Active')"
+            style="cursor: pointer;">Active
+            Users</a>
         </li>
         <li class="nav-item mb-2">
-          <a class="nav-link" [class.active]="selectedStatus === 'Inactive'" (click)="filterUsers('Inactive')">Inactive Users</a>
+          <a class="nav-link" [class.active]="selectedStatus === 'Inactive'" (click)="filterUsers('Inactive')"
+            style="cursor: pointer;">Inactive
+            Users</a>
         </li>
       </ul>
 
       <button class="btn btn-danger mt-auto w-100" (click)="logout()">Logout</button>
+      <div class="mt-3 text-muted small">
+        Total Users: {{ users.length }}
+      </div>
     </div>
 
     <!-- Main Content -->
@@ -33,11 +41,7 @@
         <!-- Search Bar -->
         <div class="col-auto mt-2 mt-md-0">
           <div class="input-group">
-            <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Search by email..." 
-              [(ngModel)]="searchTerm"
+            <input type="text" class="form-control" placeholder="Search by email..." [(ngModel)]="searchTerm"
               (keyup.enter)="searchUsers()">
             <button class="btn btn-outline-primary" (click)="searchUsers()">Search</button>
           </div>
@@ -50,24 +54,44 @@
           <thead class="table-dark">
             <tr>
               <th>Email</th>
+              <th>Name</th>
               <th>Role</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let u of users" [ngClass]="{'table-light': u.status === 'Active', 'table-warning': u.status === 'Inactive'}">
+
+            <!-- BOOLEAN STATUS FIX + COLOR FIX -->
+            <tr *ngFor="let u of users" [ngClass]="{
+                  'table-primary': u.status === true, 
+                  'table-danger': u.status === false
+                }">
+
               <td>{{ u.email }}</td>
+              <td>{{ u.fullName }}</td>
               <td>{{ u.role }}</td>
+
               <td>
-                <span class="badge" [ngClass]="{'bg-success': u.status === 'Active','bg-warning text-dark': u.status === 'Inactive'}">
-                  {{ u.status }}
+                <span class="badge" [ngClass]="{
+                        'bg-primary': u.status === true,
+                        'bg-danger': u.status === false
+                      }">
+                  {{ u.status ? 'Active' : 'Inactive' }}
                 </span>
               </td>
+
               <td>
-                <button class="btn btn-danger btn-sm" (click)="disable(u.id)">Disable</button>
+                <button *ngIf="u.status" class="btn btn-danger btn-sm" (click)="disable(u.uuid)">
+                  Disable
+                </button>
+                <button *ngIf="!u.status" class="btn btn-success btn-sm" (click)="enable(u.uuid)">
+                  Enable
+                </button>
               </td>
+
             </tr>
+
           </tbody>
         </table>
       </div>
